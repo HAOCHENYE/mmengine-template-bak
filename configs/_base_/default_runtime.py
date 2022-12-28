@@ -6,8 +6,7 @@ default_hooks = dict(
     logger=dict(type='LoggerHook', interval=50),
     param_scheduler=dict(type='ParamSchedulerHook'),
     checkpoint=dict(type='CheckpointHook', interval=1),
-    sampler_seed=dict(type='DistSamplerSeedHook')
-)
+    sampler_seed=dict(type='DistSamplerSeedHook'))
 
 env_cfg = dict(
     cudnn_benchmark=False,

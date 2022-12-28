@@ -1,4 +1,4 @@
-""" Implement the custom visualizer in this package.
+"""Implement the custom visualizer in this package.
 
 Without using BaseDataElement, the user does not need to implement
 XXXLocalVisualizer themselves. They can simply use the built-in
@@ -16,5 +16,5 @@ from mmengine_template.registry import VISUALIZERS
 
 @VISUALIZERS.register_module()
 class CustomVisualizer(Visualizer):
-    """ Implement the custom visualizer here. """
+    """Implement the custom visualizer here."""
     ...

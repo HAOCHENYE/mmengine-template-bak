@@ -29,8 +29,7 @@ def main(args):
 
     # TODO: Support inference of image directory.
     # build the model from a config file and a checkpoint file
-    model = init_model(
-        args.config, args.checkpoint, device=args.device)
+    model = init_model(args.config, args.checkpoint, device=args.device)
 
     result = inference_model(model, args.img)
 
@@ -38,8 +37,6 @@ def main(args):
     img = mmcv.imread(args.img)
     img = mmcv.imconvert(img, 'bgr', 'rgb')
     plot_result(img, result, args)
-    
-
 
 
 if __name__ == '__main__':

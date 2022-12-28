@@ -26,8 +26,9 @@ def register_all_modules(init_default_scope: bool = True) -> None:
     import mmengine_template.visualization  # noqa: F401,F403
 
     if init_default_scope:
-        never_created = (DefaultScope.get_current_instance() is None or
-                         not DefaultScope.check_instance_created('mmdet'))
+        never_created = (
+            DefaultScope.get_current_instance() is None
+            or not DefaultScope.check_instance_created('mmdet'))
         if never_created:
             DefaultScope.get_instance('mmdet', scope_name='mmdet')
             return

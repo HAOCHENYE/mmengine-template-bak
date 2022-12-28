@@ -62,11 +62,9 @@ def init_model(
 ImagesType = Union[str, np.ndarray, Sequence[str], Sequence[np.ndarray]]
 
 
-def inference_model(
-    model: nn.Module,
-    imgs: ImagesType,
-    test_pipeline: Optional[Compose] = None
-):
+def inference_model(model: nn.Module,
+                    imgs: ImagesType,
+                    test_pipeline: Optional[Compose] = None):
     """Inference image(s) with the detector.
 
     Args:
@@ -102,7 +100,12 @@ def inference_model(
     result_list = []
     for img in imgs:
         # prepare data
-        data_ = dict(img_path=img)
+        if isinstance(img, np.ndarray):
+            # TODO: remove img_id.
+            data_ = dict(img=img, img_id=0)
+        else:
+            # TODO: remove img_id.
+            data_ = dict(img_path=img, img_id=0)
         # build the data pipeline
         data_ = test_pipeline(data_)
 
