@@ -23,7 +23,6 @@ def register_all_modules(init_default_scope: bool = True) -> None:
     import mmengine_template.engine  # noqa: F401,F403
     import mmengine_template.evaluation  # noqa: F401,F403
     import mmengine_template.models  # noqa: F401,F403
-    import mmengine_template.visualization  # noqa: F401,F403
 
     if init_default_scope:
         never_created = (

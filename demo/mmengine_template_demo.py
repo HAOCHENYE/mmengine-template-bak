@@ -19,14 +19,11 @@ def parse_args():
 
 
 def main(args):
-    # register all modules in mmdet into the registries
+    # register all modules in mmdet.
     register_all_modules()
 
-    # TODO: Support inference of image directory.
-    # build the model from a config file and a checkpoint file
-    inferencer = CustomInferencer(
-        args.config, args.checkpoint, save_path=args.out_file)
-    inferencer(args.img, vis_thresh=0.8)
+    inferencer = CustomInferencer(args.config, args.checkpoint, args.device)
+    inferencer(args.img)
 
 
 if __name__ == '__main__':
