@@ -1,8 +1,9 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 from argparse import ArgumentParser
 
+from mmengine.registry import DefaultScope
+
 from mmengine_template.infer import CustomInferencer
-from mmengine_template.utils import register_all_modules
 
 
 def parse_args():
@@ -19,11 +20,11 @@ def parse_args():
 
 
 def main(args):
-    # register all modules in mmdet.
-    register_all_modules()
-
-    inferencer = CustomInferencer(args.config, args.checkpoint, args.device)
-    inferencer(args.img)
+    DefaultScope.get_instance(
+        name='mmengine_template', scope_name='mmengine_template')
+    inferencer = CustomInferencer(
+        args.config, args.checkpoint, save_path=args.out_file)
+    inferencer(args.img, vis_thresh=0.8)
 
 
 if __name__ == '__main__':

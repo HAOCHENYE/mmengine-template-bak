@@ -1,4 +1,4 @@
-from .custom_dataset import CustomDataset
-from .transform.custom_transform import CustomTransform
+from .datasets import CustomDataset
+from .transforms import CustomTransform
 
 __all__ = ['CustomDataset', 'CustomTransform']

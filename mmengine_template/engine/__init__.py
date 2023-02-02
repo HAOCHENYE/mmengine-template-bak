@@ -1,9 +1,12 @@
 from .hooks import CustomHook
+from .optim_wrapper_constructors import CustomOptimWrapperConstructor
+from .optim_wrappers import CustomOptimWrapper
 from .optimizers import CustomOptimizer
-from .scheduler import CustomLRScheduler, CustomMomentumScheduler
+from .schedulers import CustomLRScheduler, CustomMomentumScheduler
 from .utils import trigger_visualization_hook
 
 __all__ = [
     'trigger_visualization_hook', 'CustomHook', 'CustomOptimizer',
-    'CustomLRScheduler', 'CustomMomentumScheduler'
+    'CustomLRScheduler', 'CustomMomentumScheduler',
+    'CustomOptimWrapperConstructor', 'CustomOptimWrapper'
 ]

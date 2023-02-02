@@ -1,3 +1,3 @@
-from .custom_metric import CustomMetric
+from .metrics import CustomMetric
 
 __all__ = ['CustomMetric']
