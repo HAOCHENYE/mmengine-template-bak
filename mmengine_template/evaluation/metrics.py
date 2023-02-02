@@ -6,13 +6,9 @@ from mmengine_template.registry import METRICS
 @METRICS.register_module()
 class CustomMetric(BaseMetric):
 
-    def process(self, *args, **kwargs):
-        # Need to call self.add
-        ...
-
-    def add(self, predictions, labels):
+    def add(self, gt, preds):
         ...
 
     # NOTE for evaluator
-    def evaluate(self, size):
-        return self.compute(size)
+    def compute_metric(self, size):
+        ...

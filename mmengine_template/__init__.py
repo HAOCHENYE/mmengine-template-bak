@@ -1,9 +1,13 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import mmcv
 import mmengine
+import mmengine.runner.runner as runner
 from mmengine.utils import digit_version
 
+from .evaluation import Evaluator
 from .version import __version__, version_info
+
+runner.Evaluator = Evaluator
 
 mmcv_minimum_version = '2.0.0rc0'
 mmcv_maximum_version = '2.1.0'
