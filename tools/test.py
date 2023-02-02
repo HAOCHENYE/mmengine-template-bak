@@ -7,7 +7,6 @@ from mmengine.config import Config, DictAction
 from mmengine.evaluator import DumpResults
 from mmengine.runner import Runner
 
-from mmengine_template.engine.utils import trigger_visualization_hook
 from mmengine_template.registry import RUNNERS
 
 
@@ -22,11 +21,6 @@ def parse_args():
         '--out',
         type=str,
         help='dump predictions to a pickle file for offline evaluation')
-    parser.add_argument(
-        '--show',
-        action='store_true',
-        help='show prediction results. '
-        'Enabling this option requires ')
     parser.add_argument(
         '--cfg-options',
         nargs='+',
@@ -68,9 +62,6 @@ def main():
                                 osp.splitext(osp.basename(args.config))[0])
 
     cfg.load_from = args.checkpoint
-
-    if args.show:
-        cfg = trigger_visualization_hook(cfg, args)
 
     # build the runner from config
     if 'runner_type' not in cfg:
