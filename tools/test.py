@@ -9,12 +9,10 @@ from mmengine.runner import Runner
 
 from mmengine_template.engine.utils import trigger_visualization_hook
 from mmengine_template.registry import RUNNERS
-from mmengine_template.utils import register_all_modules
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(
-        description='MMDet test (and eval) a model')
+    parser = argparse.ArgumentParser(description='test (and eval) a model')
     parser.add_argument('config', help='test config file path')
     parser.add_argument('checkpoint', help='checkpoint file')
     parser.add_argument(
@@ -25,14 +23,10 @@ def parse_args():
         type=str,
         help='dump predictions to a pickle file for offline evaluation')
     parser.add_argument(
-        '--show', action='store_true', help='show prediction results')
-    parser.add_argument(
-        '--show-dir',
-        help='directory where painted images will be saved. '
-        'If specified, it will be automatically saved '
-        'to the work_dir/timestamp/show_dir')
-    parser.add_argument(
-        '--wait-time', type=float, default=2, help='the interval of show (s)')
+        '--show',
+        action='store_true',
+        help='show prediction results. '
+        'Enabling this option requires ')
     parser.add_argument(
         '--cfg-options',
         nargs='+',
@@ -58,10 +52,6 @@ def parse_args():
 def main():
     args = parse_args()
 
-    # register all modules in mmdet into the registries
-    # do not init the default scope here because it will be init in the runner
-    register_all_modules(init_default_scope=False)
-
     # load config
     cfg = Config.fromfile(args.config)
     cfg.launcher = args.launcher
@@ -79,7 +69,7 @@ def main():
 
     cfg.load_from = args.checkpoint
 
-    if args.show or args.show_dir:
+    if args.show:
         cfg = trigger_visualization_hook(cfg, args)
 
     # build the runner from config
