@@ -1,3 +1,4 @@
+```bash
 ├── configs                                 Commonly used base config file.
 ├── demo
 │   ├── mmengine_template_demo.py           General demo script
@@ -26,3 +27,4 @@
 │   ├── registry.py
 │   └── version.py
 ├── tools                                   General train/test script
+```
