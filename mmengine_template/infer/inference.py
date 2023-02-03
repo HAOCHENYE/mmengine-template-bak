@@ -1,3 +1,13 @@
+"""This module is to define the inferencer which will be used in ``demo.py``
+
+Follow the `guide <https://mmengine.readthedocs.io/zh_CN/latest/design/infer.html>`
+in MMEngine to customize your inferencer.
+
+The default implementation only does the register process. Users need to rename
+the ``CustomXXXcheduler`` to the real name of the inferencer and implement it.
+it.
+"""  # noqa: E501
+
 import os.path as osp
 
 import numpy as np
@@ -5,20 +15,33 @@ import torch
 from mmcv import imread
 from mmengine.device import get_device
 from mmengine.infer import BaseInferencer
+from mmengine.registry import INFERENCERS
 from mmengine.visualization import Visualizer
 
 
+@INFERENCERS.register_module()
 class CustomInferencer(BaseInferencer):
 
     def _init_visualizer(self, cfg):
-        """Return custom visualizer."""
+        """Return custom visualizer.
+
+        The returned visualizer will be set as ``self.visualzier``.
+        """
+        if cfg.get('visualizer') is not None:
+            visualizer = cfg.visualizer
+            visualizer.setdefault('name', 'mmengine_template')
+            return Visualizer.get_instance(**cfg.visualizer)
         return Visualizer(name='mmengine_template')
 
     def _init_pipeline(self, cfg):
         """Return a pipeline to process input data.
 
+        The returned pipeline should be a callable object and will be set as
+        ``self.visualizer``
+
         This default implementation will read the image and convert it to a
-        Tensor with shape (C, H, W) and dtype torch.float32.
+        Tensor with shape (C, H, W) and dtype torch.float32. Also, users can
+        build the pipeline from the ``cfg``.
         """
         device = get_device()
 
